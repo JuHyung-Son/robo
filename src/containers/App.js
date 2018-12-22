@@ -1,8 +1,8 @@
 import React from 'react';
-import CardList from './CardList'
-import {robots} from './robots'
-import SearchBox from './SearchBox'
-import Scroll from './Scroll'
+import CardList from '../components/CardList'
+import {robots} from '../robots'
+import SearchBox from '../components/SearchBox'
+import Scroll from '../components/Scroll'
 
 class App extends React.Component {
     constructor() {
@@ -33,7 +33,7 @@ class App extends React.Component {
             robots => {
                 return robots.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
             })
-        if (this.state.robots.length === 0) {
+        if (!robots.length) {
             return <h1> Loading </h1>
         } else {
         return (
