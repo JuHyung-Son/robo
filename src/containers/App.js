@@ -1,5 +1,6 @@
 import React from 'react';
 import CardList from '../components/CardList'
+import ErrorBoundry from '../components/ErrorBoundry'
 import {robots} from '../robots'
 import SearchBox from '../components/SearchBox'
 import Scroll from '../components/Scroll'
@@ -11,15 +12,6 @@ class App extends React.Component {
             robots: [],
             searchfield: '',
         }
-        console.log('construct')
-    }
-
-    componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => this.setState({ robots: users}))
-        console.log('component didmound')
-
     }
 
     onSearchChange = (event) => {
@@ -36,12 +28,14 @@ class App extends React.Component {
         if (!robots.length) {
             return <h1> Loading </h1>
         } else {
-        return (
+        return (    
             <div className='tc'>
                 <h1> RoboFriends</h1>
                 <SearchBox searchChange={this.onSearchChange} />
                 <Scroll>
+                    <ErrorBoundry>
                 <CardList robots={filteredRobots}/>
+                    </ErrorBoundry>
                 </Scroll>
             </div>
         
